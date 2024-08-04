@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>RateYo - Scratchpad</title>
+    <meta charset="utf-8"></meta>
+    <link rel="stylesheet" href="./jquery.rateyo.min.css"/>
+  </head>
+  <body>
+
+   <div style="width: 600px; margin: 30px auto;">
+     <div id="rateyo"></div>
+   </div>
+
+   <script src="./jquery.min.js"></script>
+   <script src="./jquery.rateyo.min.js"></script>
+
+   <script type="text/javascript">
+     $('#rateyo').rateYo({
+        rating:0,
+        starWidth: '50px',
+        numStars: 5,
+        minValue: 0,
+        maxValue: 5,
+        normalFill: 'grey',
+        ratefill: 'yellow'
+        })   
+  </script>
+
+  </body>
+</html>
