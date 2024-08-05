@@ -60,6 +60,19 @@ class HomeController extends Controller
         $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
         $syncStat = 0;
 
+        if(is_null($statUpdated))
+            {
+                $tot_issue = Register::sum('issue');
+                $tot_return = Register::sum('ret');
+                $tot_books = Register::where('month', $month)->get()->first();
+
+                //update to Stat table
+                Stat::where('year', $year)->update(['issue' => $tot_issue, 'ret' => $tot_return, 'tot_book' => $tot_books->tot_book]);
+
+                $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
+            }
+
+
         if($statUpdated->count())
         {
             $tot_issue = Register::sum('issue');
