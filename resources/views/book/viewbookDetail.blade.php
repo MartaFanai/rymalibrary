@@ -64,6 +64,10 @@
               @endif
               <div class="card-body">
                 <div class="row">
+                  <div class="col-sm-3 text-right"><strong>Accession No :</strong></div>
+                  <div class="col-sm-8 pl-3 pb-3">{{ $book->accessionno ?? 'N/A' }}</div>
+                </div>
+                <div class="row">
                   <div class="col-sm-3 text-right"><strong>Author :</strong></div>
                   <div class="col-sm-8 pl-3 pb-3">{{ $book->author->name }}</div>
                 </div>
@@ -88,16 +92,28 @@
                   <div class="col-sm-8 pl-3 pb-3">{{ $book->pages ?? 'N/A' }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3 text-right"><strong>Accession No :</strong></div>
-                  <div class="col-sm-8 pl-3 pb-3">{{ $book->accessionno ?? 'N/A' }}</div>
-                </div>
-                <div class="row">
                   <div class="col-sm-3 text-right"><strong>Source :</strong></div>
                   <div class="col-sm-8 pl-3 pb-3">{{ $book->source ?? 'N/A' }}</div>
                 </div>
                 <div class="row">
+                  <div class="col-sm-3 text-right"><strong>Classification :</strong></div>
+                  <div class="col-sm-8 pl-3 pb-3">{{ $book->classificationno ?? 'N/A' }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 text-right"><strong>Subject :</strong></div>
+                  <div class="col-sm-8 pl-3 pb-3">{{ $book->subject ?? 'N/A' }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 text-right"><strong>Book No :</strong></div>
+                  <div class="col-sm-8 pl-3 pb-3">{{ $book->bookno ?? 'N/A' }}</div>
+                </div>
+                <div class="row">
                   <div class="col-sm-3 text-right"><strong>Price :</strong></div>
-                  <div class="col-sm-8 pl-3 pb-3">{{ $book->price ?? 'N/A' }}</div>
+                  <div class="col-sm-8 pl-3 pb-3">{!! $book->price ? '&#8377; ' . $book->price : 'N/A' !!}</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 text-right"><strong>Source :</strong></div>
+                  <div class="col-sm-8 pl-3 pb-3">{{ $book->description ?? 'N/A' }}</div>
                 </div>
                 <div class="row">
                   <div class="col-sm-3 text-right"><strong>Location :</strong></div>
