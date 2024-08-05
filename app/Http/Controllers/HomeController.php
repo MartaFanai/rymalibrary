@@ -55,50 +55,6 @@ class HomeController extends Controller
             $stat->save();
         }
 
-        //Update in every login
-        $today = Carbon::today();
-        $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
-        $syncStat = 0;
-
-        if(is_null($statUpdated))
-            {
-                $tot_issue = Register::sum('issue');
-                $tot_return = Register::sum('ret');
-                $tot_books = Register::where('month', $month)->get()->first();
-
-                //update to Stat table
-                Stat::where('year', $year)->update(['issue' => $tot_issue, 'ret' => $tot_return, 'tot_book' => $tot_books->tot_book]);
-
-                $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
-            }
-
-
-        if($statUpdated->count())
-        {
-            $tot_issue = Register::sum('issue');
-            $tot_return = Register::sum('ret');
-            $tot_books = Register::where('month', $month)->get()->first();
-
-            $stat = Stat::where('id', $statUpdated->id)->where('issue', $tot_issue)->where('ret', $tot_return)->where('tot_book', $tot_books->tot_book)->count();
-
-            if(!$stat)
-            {
-                $syncStat = 1;
-            }
-
-            if($syncStat)
-            {
-                $tot_issue = Register::sum('issue');
-                $tot_return = Register::sum('ret');
-                $tot_books = Register::where('month', $month)->get()->first();
-
-                //update to Stat table
-                Stat::where('year', $year)->update(['issue' => $tot_issue, 'ret' => $tot_return, 'tot_book' => $tot_books->tot_book]);
-            }
-
-        }
-        
-
         //Adding new years
         if(is_null($oldYear1))
         {
@@ -192,6 +148,51 @@ class HomeController extends Controller
         {
              DB::update('update registers set tot_book = ? where year =? and month = ?', [$verify->tot_book, $year, $month]);
         }
+
+
+        //Update in every login
+        $today = Carbon::today();
+        $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
+        $syncStat = 0;
+
+        if(is_null($statUpdated))
+            {
+
+                $tot_issue = Register::sum('issue');
+                $tot_return = Register::sum('ret');
+                $tot_books = Register::where('month', $month)->get()->first();
+
+                //update to Stat table
+                Stat::where('year', $year)->update(['issue' => $tot_issue, 'ret' => $tot_return, 'tot_book' => $tot_books->tot_book]);
+
+                $statUpdated = Stat::whereDate('updated_at', $today)->get()->first();
+            }
+
+        if($statUpdated->count())
+        {
+            $tot_issue = Register::sum('issue');
+            $tot_return = Register::sum('ret');
+            $tot_books = Register::where('month', $month)->get()->first();
+
+            $stat = Stat::where('id', $statUpdated->id)->where('issue', $tot_issue)->where('ret', $tot_return)->where('tot_book', $tot_books->tot_book)->count();
+
+            if(!$stat)
+            {
+                $syncStat = 1;
+            }
+
+            if($syncStat)
+            {
+                $tot_issue = Register::sum('issue');
+                $tot_return = Register::sum('ret');
+                $tot_books = Register::where('month', $month)->get()->first();
+
+                //update to Stat table
+                Stat::where('year', $year)->update(['issue' => $tot_issue, 'ret' => $tot_return, 'tot_book' => $tot_books->tot_book]);
+            }
+
+        }
+        
 
         $data['data'] = DB::select('select issue, ret, tot_book from registers where year = ?', [$year]);
         $notRet['notRet'] = DB::select('SELECT * FROM issues');
