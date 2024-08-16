@@ -75,7 +75,7 @@ input[type="number"]::-webkit-outer-spin-button {
                   </div>
               </div>
 
-              {{-- <div class="form-group">
+              <div class="form-group">
                   <label>Section</label>
                     <select name="section" class="form-control col-4" required>
                             <option value=""> Select Section </option>
@@ -84,7 +84,7 @@ input[type="number"]::-webkit-outer-spin-button {
                             <option value="Taitesena"> Taitesena Section </option>
                             <option value="Vanapa"> Vanapa Section </option>
                     </select>
-              </div> --}}
+              </div>
  
               <div class="form-group">
                   <label>Mobile Number <span class="text-danger"> *</span></label>
