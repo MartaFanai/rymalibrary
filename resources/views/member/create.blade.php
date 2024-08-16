@@ -75,6 +75,7 @@ input[type="number"]::-webkit-outer-spin-button {
                   </div>
               </div>
 
+              {{-- Setion display --}}
               <div class="form-group">
                   <label>Section</label>
                     <select name="section" class="form-control col-4" required>
